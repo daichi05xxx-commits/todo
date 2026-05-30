@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TODO</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="header-inner">
+        <h1 class="logo">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 11 12 14 22 4"></polyline>
+            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+          </svg>
+          TODO
+        </h1>
+        <button class="theme-toggle" id="themeToggle" title="ダーク/ライト切替">🌙</button>
+      </div>
+    </header>
+
+    <main class="main">
+      <!-- 追加フォーム -->
+      <div class="add-panel" id="addPanel">
+        <div class="add-row">
+          <input class="input-main" id="inputTitle" placeholder="新しいタスクを追加..." autocomplete="off">
+          <button class="btn btn-primary" id="btnAdd">+ 追加</button>
+        </div>
+        <div class="add-details" id="addDetails">
+          <textarea class="input-desc" id="inputDesc" placeholder="説明（任意）" rows="2"></textarea>
+          <div class="add-meta">
+            <select class="sel" id="inputPriority">
+              <option value="high">🔴 高</option>
+              <option value="medium" selected>🟡 中</option>
+              <option value="low">🟢 低</option>
+            </select>
+            <input class="sel" type="date" id="inputDate">
+            <input class="sel input-cat" id="inputCategory" placeholder="🏷 カテゴリ">
+          </div>
+        </div>
+      </div>
+
+      <!-- ツールバー -->
+      <div class="toolbar">
+        <div class="filters" id="filters">
+          <button class="f-btn active" data-filter="all">すべて</button>
+          <button class="f-btn" data-filter="active">未完了</button>
+          <button class="f-btn" data-filter="completed">完了済み</button>
+        </div>
+        <div class="stats">
+          <span id="statsText"></span>
+          <button class="btn-link" id="btnClearCompleted" style="display:none">完了済みを削除</button>
+        </div>
+      </div>
+
+      <!-- タスクリスト -->
+      <div class="todo-list" id="todoList"></div>
+      <div class="empty" id="emptyState" style="display:none">
+        <div class="empty-icon" id="emptyIcon">📋</div>
+        <p id="emptyText">タスクがありません</p>
+      </div>
+    </main>
+  </div>
+
+  <!-- 編集モーダル -->
+  <div class="overlay" id="overlay" style="display:none">
+    <div class="modal">
+      <div class="modal-head">
+        <span class="modal-title">タスクを編集</span>
+        <button class="modal-close" id="modalClose">✕</button>
+      </div>
+      <div class="modal-body">
+        <label>タイトル <span class="req">*</span></label>
+        <input class="input-main" id="editTitle">
+        <label>説明</label>
+        <textarea class="input-desc" id="editDesc" rows="3"></textarea>
+        <div class="modal-meta">
+          <div class="meta-col">
+            <label>優先度</label>
+            <select class="sel" id="editPriority">
+              <option value="high">🔴 高</option>
+              <option value="medium">🟡 中</option>
+              <option value="low">🟢 低</option>
+            </select>
+          </div>
+          <div class="meta-col">
+            <label>期日</label>
+            <input class="sel" type="date" id="editDate">
+          </div>
+          <div class="meta-col">
+            <label>カテゴリ</label>
+            <input class="sel" id="editCategory" placeholder="カテゴリ">
+          </div>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-ghost" id="editCancel">キャンセル</button>
+        <button class="btn btn-primary" id="editSave">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
